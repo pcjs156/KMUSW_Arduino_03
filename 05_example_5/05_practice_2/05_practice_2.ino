@@ -10,26 +10,35 @@ void setup() {
     ;
   }
   
+  
+}
+
+void loop() {
   // 1초간 켬
   digitalWrite(PIN_LED, 0);
   delay(1000);
 
+  // 꺼진 상태로 
   toggle = 1;
-}
 
-void loop() {
-  while (turn_on_cnt <= 5) {
-    delay(100);
-
+  // 5번 깜빡임
+  while (turn_on_cnt < 5) {
     digitalWrite(PIN_LED, toggle);
+    delay(100);
 
     if (toggle == 0)
       turn_on_cnt++;
 
     toggle = toggle_state(toggle);
   }
-
+  
+  // 동작을 완료하면 LED를 끔
   digitalWrite(PIN_LED, 1);
+
+  // 무한 루프로 loop()를 정지시킴
+  while (1) {
+    ;
+  }
 }
 
 int toggle_state(int toggle) {
