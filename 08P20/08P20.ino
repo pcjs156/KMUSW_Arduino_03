@@ -78,9 +78,10 @@ void loop() {
 // turn on the LED if the distance is between dist_min and dist_max
   if(dist_raw < dist_min || dist_raw > dist_max) {
     analogWrite(PIN_LED, 255);
+    Serial.println("??");
   }
   else {
-    analogWrite(PIN_LED, brightness);  
+    analogWrite(PIN_LED, brightness);
   }
 
 //// do something here
