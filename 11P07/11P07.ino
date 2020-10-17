@@ -16,7 +16,7 @@
 #define _DUTY_NEU 1476 // servo neutral position (90 degree)
 #define _DUTY_MAX 2399 // servo full counterclockwise position (180 degree)
 
-#define ALPHA 0.5
+#define ALPHA 0.8
 
 // global variables
 float timeout; // unit: us
@@ -38,11 +38,11 @@ void setup() {
   myservo.writeMicroseconds(_DUTY_NEU);
 
 // initialize USS related variables
-  dist_min = _DIST_MIN; 
-  dist_max = _DIST_MAX;
-  timeout = (INTERVAL / 2) * 1000.0; // precalculate pulseIn() timeout value. (unit: us)
-  dist_raw = dist_prev = dist_ema = 0.0; // raw distance output from USS (unit: mm)
-  scale = 0.001 * 0.5 * SND_VEL;
+    dist_min = _DIST_MIN; 
+    dist_max = _DIST_MAX;
+    timeout = (INTERVAL / 2) * 1000.0; // precalculate pulseIn() timeout value. (unit: us)
+    dist_raw = dist_prev = dist_ema = 0.0; // raw distance output from USS (unit: mm)
+    scale = 0.001 * 0.5 * SND_VEL;
 
 // initialize serial port
   Serial.begin(57600);
