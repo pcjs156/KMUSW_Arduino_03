@@ -15,8 +15,11 @@
 // Global variables
 float dist_min, dist_max, dist_raw; // unit: mm
 unsigned long last_sampling_time;   // unit: ms
-float scale;                        // 펄스 주기를 거리로 변환하는데 사용
 float last_reading;                 // 마지막 reading 값
+
+// EMA Filter
+#define ALPHA 0.3
+float filtered_distance;
 
 Servo myservo;
 
@@ -25,10 +28,11 @@ void setup() {
   myservo.attach(PIN_SERVO);
   myservo.writeMicroseconds(_DUTY_NEU);
 
-  // USS 관련 변수 초기화
+  // 거리 측정 관련 변수 초기화
   dist_min = _DIST_MIN;
   dist_max = _DIST_MAX;
   dist_raw = 0.0;                    // USS로부터 읽어온 처리 전의 거리 (unit: mm)
+  filtered_distance = 0.0;
 
   Serial.begin(115200);
 
@@ -42,23 +46,28 @@ void loop() {
 
   dist_raw = ir_distance();
 
-  // 만약 현재 읽어들인 값이 0보다 큰 경우(정상입력)
-  // 가장 최근의 거리값을 현재 거리값으로 갱신
-  if (dist_raw > 0)
+  // 정상입력: 가장 최근의 거리값을 현재 거리값으로 갱신
+  if (dist_min <= dist_raw && dist_raw <= dist_max)
     last_reading = dist_raw;
-  // 만약 그렇지 않은 경우(비정상입력)
-  // 현재 거리값을 가장 최근의 거리값으로 대체
+  // 비정상입력: 현재 거리값을 가장 최근의 거리값으로 대체
   else
     dist_raw = last_reading;
+
+  filtered_distance = (ALPHA * dist_raw) + ((1-ALPHA) * filtered_distance);
 
   Serial.print("Min:0,");
   Serial.print("raw:");
   Serial.print(dist_raw);
   Serial.print(", ");
-  Serial.print("read_degree:");
-  Serial.print(myservo.read());
+  Serial.print("filtereed:");
+  Serial.print(filtered_distance);
   Serial.print(", ");
   Serial.println("Max:400");
+
+  if (filtered_distance < 255)
+    myservo.writeMicroseconds(_DUTY_MAX);
+  else
+    myservo.writeMicroseconds(_DUTY_MIN);
 
   last_sampling_time += INTERVAL;
 }
