@@ -130,7 +130,7 @@ int dequeue(MedianQueue *queue) {
   return 1;
 }
 
-void update(MedianQueue *queue, float data) {
+void update_queue(MedianQueue *queue, float data) {
   // 만약 최대 저장 가능 갯수보다 많거나 같게 저장되어 있다면
   if(is_full(queue)) {
     // 우선 가장 오래된 데이터를 버린다
@@ -221,7 +221,7 @@ void loop() {
   // get a distance reading from the USS
   dist_raw = USS_measure(PIN_TRIG,PIN_ECHO);
 
-  update(&queue, dist_raw);
+  update_queue(&queue, dist_raw);
   median = get_median_val(&queue);
 //    print_queue(&queue);
       
