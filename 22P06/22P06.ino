@@ -31,7 +31,8 @@
 #define _INTERVAL_SERIAL 100 // Serial제어주기 (ms)
 
 // PID parameters
-#define _KP 0.4
+#define _KP 1.0
+
 
 // filter by 추헌준
 const float coE[] = {-0.0000392, 0.0271896, -4.5413063, 355.7041343};
@@ -186,14 +187,12 @@ void loop() {
       Serial.print("dist_ir:");
       Serial.print(dist_ema);
       Serial.print(",pterm:");
-      // Serial.print(map(pterm,-1000,1000,510,610));
-      Serial.print(pterm);
+      Serial.print(map(pterm,-1000,1000,510,610));
       Serial.print(",duty_target:");
       Serial.print(duty_target);
       Serial.print(",duty_curr:");
-      Serial.print(duty_curr);
-//      Serial.print(map(duty_curr,1000,2000,410,510));
-      // Serial.print(",Min:100,Low:200,dist_target:255,High:310,Max:410");
+      Serial.print(map(duty_curr,1000,2000,410,510));
+      Serial.print(",Min:100,Low:200,dist_target:255,High:310,Max:410");
       Serial.println();
       
        // 마지막 Serial 출력 시각 업데이트
