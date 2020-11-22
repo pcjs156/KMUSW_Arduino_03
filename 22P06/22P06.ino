@@ -31,8 +31,8 @@
 #define _INTERVAL_SERIAL 100 // Serial제어주기 (ms)
 
 // PID parameters
-#define _KP 1.0
-
+#define _UP_KP 0.7
+#define _DOWN_KP 1.2
 
 // filter by 추헌준
 const float coE[] = {-0.0000392, 0.0271896, -4.5413063, 355.7041343};
@@ -128,16 +128,18 @@ void loop() {
       pterm = error_curr;
       
       // 제어량: P + I + D 예정
-      control = _KP * pterm;
+//      control = _KP * pterm;
 
       // control이 음수: 목표까지의 거리 < 탁구공까지의 거리
       // 각도를 올려야 함 -> duty_target을 낮춰야 함
       if(control < 0) {
+        control = _UP_KP * pterm;
         duty_target = map(control, _DIST_TARGET - _DIST_MAX, 0, _DUTY_MIN, _DUTY_NEU);
       }
       // control이 양수: 목표까지의 거리 > 탁구공까지의 거리
       // 각도를 내려야 함 -> duty_target을 높여야 함
       else {
+        control = _DOWN_KP * pterm;
         duty_target = map(control, 0, _DIST_TARGET - _DIST_MIN, _DUTY_NEU, _DUTY_MAX);
       }
 
