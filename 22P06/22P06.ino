@@ -184,19 +184,15 @@ void loop() {
     if(event_serial) {
       event_serial = false;
       
-      Serial.print("error: ");
-      Serial.print(error_curr);
-      Serial.print(", ");
       Serial.print("dist_ir:");
-      Serial.print(dist_ema);
+      Serial.print(dist_raw);
       Serial.print(",pterm:");
       Serial.print(map(pterm,-1000,1000,510,610));
       Serial.print(",duty_target:");
-      Serial.print(duty_target);
+      Serial.print(map(duty_target,1000,2000,410,510));
       Serial.print(",duty_curr:");
       Serial.print(map(duty_curr,1000,2000,410,510));
-      Serial.print(",Min:100,Low:200,dist_target:255,High:310,Max:410");
-      Serial.println();
+      Serial.println(",Min:100,Low:200,dist_target:255,High:310,Max:410");
       
        // 마지막 Serial 출력 시각 업데이트
       last_sampling_time_serial += _INTERVAL_SERIAL;
