@@ -17,13 +17,13 @@
 #define _DIST_ALPHA 0.8
 
 // Servo range
-#define _DUTY_MIN 1065   // 서보 제어 펄스 폭: 최고 각도
-#define _DUTY_NEU 1540   // 서보 제어 펄스 폭: 수평
-#define _DUTY_MAX 1950  // 서보 제어 펄스 폭: 최저 각도
+#define _DUTY_MIN 1085   // 서보 제어 펄스 폭: 최고 각도 / 212mm
+#define _DUTY_NEU 1480   // 서보 제어 펄스 폭: 수평 / 191mm
+#define _DUTY_MAX 2100  // 서보 제어 펄스 폭: 최저 각도 / 170mm
 
 // Servo speed control
 #define _SERVO_ANGLE 30 
-#define _SERVO_SPEED 180
+#define _SERVO_SPEED 360
 
 // Event periods
 #define _INTERVAL_DIST 20    // 거리측정주기 (ms)
@@ -31,11 +31,12 @@
 #define _INTERVAL_SERIAL 100 // Serial제어주기 (ms)
 
 // PID parameters
-#define _UP_KP 0.7
-#define _DOWN_KP 1.2
+#define _UP_KP 0.6
+#define _DOWN_KP 0.7
+
 
 // filter by 추헌준
-const float coE[] = {-0.0000345, 0.0251636, -4.4121246, 362.9735267};
+const float coE[] = {-0.0000175, 0.0131354, -1.6047382, 153.0455347};
 
 //////////////////////
 // global variables //
