@@ -42,8 +42,8 @@ float samples_num = 3;     // 스파이크 제거를 위한 부분필터에 샘�
 #define CONTROL_CONST -40
 #define _UP_KP 0.9
 #define _DOWN_KP 0.9
-#define _UP_KD 30
-#define _DOWN_KD 30
+#define _UP_KD 28.5
+#define _DOWN_KD 28.5
 
 #define _K_UP 1.8
 #define _K_DOWN 1.8
