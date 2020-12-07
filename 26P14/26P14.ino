@@ -35,7 +35,7 @@ float samples_num = 3;     // 스파이크 제거를 위한 부분필터에 샘�
 // Event periods
 #define _INTERVAL_DIST 30    // 거리측정주기 (ms)
 #define _INTERVAL_SERVO 30   // 서보제어주기 (ms)
-#define _INTERVAL_SERIAL 100 // Serial제어주기 (ms)
+#define _INTERVAL_SERIAL 10 // Serial제어주기 (ms)
 
 // PID parameters
 // control을 duty로 완벽히 매칭시키지 못해 정지 지점이 gain에 따라 달라지는 문제를 상수로 해결
