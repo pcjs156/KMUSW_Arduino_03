@@ -30,7 +30,7 @@ float samples_num = 3;     // 스파이크 제거를 위한 부분필터에 샘�
 
 // Servo speed control
 #define _SERVO_ANGLE 30
-#define _SERVO_SPEED 250
+#define _SERVO_SPEED 300
 
 // Event periods
 #define _INTERVAL_DIST 30    // 거리측정주기 (ms)
