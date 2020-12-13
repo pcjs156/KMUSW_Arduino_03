@@ -43,9 +43,9 @@ float dist_list[LENGTH], sum, dist_ema, alpha;
 // PID parameters
 // control을 duty로 완벽히 매칭시키지 못해 정지 지점이 gain에 따라 달라지는 문제를 상수로 해결
 #define CONTROL_CONST 0
-#define _KP 2.0
-#define _KI 0.015
-#define _KD 140.0
+#define _KP 4
+#define _KI 0.02
+#define _KD 160
 #define _K 1.0
 
 // filter by 추헌준
