@@ -33,7 +33,7 @@ float dist_list[LENGTH], sum, dist_ema, alpha;
 
 // Servo speed control
 #define _SERVO_ANGLE 30
-#define _SERVO_SPEED 300
+#define _SERVO_SPEED 1000
 
 // Event periods
 #define _INTERVAL_DIST 20    // 거리측정주기 (ms)
@@ -43,9 +43,9 @@ float dist_list[LENGTH], sum, dist_ema, alpha;
 // PID parameters
 // control을 duty로 완벽히 매칭시키지 못해 정지 지점이 gain에 따라 달라지는 문제를 상수로 해결
 #define CONTROL_CONST 0
-#define _KP 4
-#define _KI 0.02
-#define _KD 160
+#define _KP 1.8
+#define _KI 0.008
+#define _KD 120
 #define _K 1.0
 
 // filter by 추헌준
@@ -94,10 +94,8 @@ void setup() {
   iter = 0; sum = 0;
   alpha = EMA_ALPHA;
 
-  iterm = 0;
+  pterm = dterm = iterm = 0;
 
-  // move servo to neutral position
-  myservo.writeMicroseconds(_DUTY_NEU);
   // 서보 업데이트 1주기에 증감 가능한 duty 의 최댓값
   duty_chg_per_interval = (_DUTY_MAX - _DUTY_MIN) * (_SERVO_SPEED / 180.0) * (_INTERVAL_SERVO / 1000.0);
 
